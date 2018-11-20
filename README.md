@@ -1,20 +1,17 @@
-# Leaflet.Pin
-[![Build Status](https://travis-ci.org/kklimczak/Leaflet.Pin.svg?branch=master)](https://travis-ci.org/kklimczak/Leaflet.Pin)
-
 #### General ##
 
-Enable attaching markers to other layers during draw or edit features with **Leaflet.Draw**. Checkout [demo](https://kklimczak.github.io/Leaflet.Pin/).
+Enable attaching _polygons_ to other layers during draw or edit features with **Leaflet.Draw**. Checkout [demo](https://krzyhook.github.io/Leaflet.Pin/).
+
+This is adjustment of the original [Leaflet.Pin](https://kklimczak.github.io/Leaflet.Pin/) to the newest `leaflet.js` and `leaflet.draw.js` which is no longer maintained.
 
 #### Dependencies ##
 
 It depends on [Leaflet.GeometryUtil](https://github.com/makinacorpus/Leaflet.GeometryUtil) and [Leaflet.Draw](https://github.com/Leaflet/Leaflet.draw).
 
 ## Usage ##
-You can download Leaflet.Pin from this repository or use bower
+You can download Leaflet.Pin from this repository
 
-`bower install leaflet-pin`
-
-After download add `leaflet.js`, `leaflet.draw.js`, `leaflet.geomtryutil.js`, `leaflet.pin.js` to your html file.
+After download add [leaflet.js](https://github.com/Leaflet/Leaflet), [leaflet.draw.js](https://github.com/Leaflet/Leaflet.draw), [leaflet.geomtryutil.js]((https://github.com/makinacorpus/Leaflet.GeometryUtil)), `leaflet.pin.js` to your html file.
 
 #### Configuration
 
@@ -74,4 +71,4 @@ For each feature (rectangle and circle not supported yet):
 map.addGuideLayer(new L.FeatureGroup());
 ```
 
-This plugin based on [Leaflet.Snap](https://github.com/makinacorpus/Leaflet.Snap).
+This plugin based on [Leaflet.Pin](https://kklimczak.github.io/Leaflet.Pin/) and [Leaflet.Snap](https://github.com/makinacorpus/Leaflet.Snap).
