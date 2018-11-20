@@ -249,8 +249,8 @@
             }
             this._pinning.enable(marker);
 
-
             marker.on('click', this._pin_on_click, this);
+            marker.on('mousedown', this._pin_on_click, this);
         },
 
         _pin_on_mouse_down: function () {
@@ -286,10 +286,16 @@
                 var markerAmount = this._markers.length,
                     marker = this._markers[markerAmount - 1];
                 if (e) {
-                    marker.setLatLng(e.target._latlng);
+                    var latlng = e.target._latlng || e.latlng;
+                    if (!latlng) {
+                        return;
+                    }
+
+                    marker._latlng = L.latLng(latlng);
+                    marker.update();
                     if (this._poly) {
                         var polyPointsAmount = this._poly._latlngs.length;
-                        this._poly._latlngs[polyPointsAmount - 1] = e.target._latlng;
+                        this._poly._latlngs[polyPointsAmount - 1] = L.latLng(latlng);
                         this._poly.redraw();
                     }
                 }
@@ -332,8 +338,11 @@
     L.Edit.Marker.include(L.Edit.Marker.Pin);
     L.Edit.Marker.addInitHook('_pin_initialize');
 
-    L.Draw.Feature.include(L.Draw.Feature.Pin);
-    L.Draw.Feature.addInitHook('_pin_initialize');
+    // L.Draw.Feature.include(L.Draw.Feature.Pin);
+    // L.Draw.Feature.addInitHook('_pin_initialize');
+
+    L.Draw.Polyline.include(L.Draw.Feature.Pin);
+    L.Draw.Polyline.addInitHook('_pin_initialize');
 
     L.Edit.Poly.Pin = {
         _pin_initialize: function () {
