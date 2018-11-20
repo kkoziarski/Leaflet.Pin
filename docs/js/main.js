@@ -23,11 +23,16 @@ var drawControl = new L.Control.Draw({
     polygon: {
       distance: 25
     },
-    marker: {
-      distance: 25
-    },
+    marker: false,
     rectangle: {},
-    circle: {}
+    circle: false,
+    circlemarker: false
+    // marker: {
+    //   distance: 25
+    // },
+    // rectangle: {},
+    // circle: {},
+    // circlemarker: {}
   },
   edit: {
     featureGroup: drawnItems
