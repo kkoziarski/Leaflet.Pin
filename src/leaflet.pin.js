@@ -312,6 +312,12 @@
         }
     };
 
+    // L.Draw.Feature.include(L.Draw.Feature.Pin);
+    // L.Draw.Feature.addInitHook('_pin_initialize');
+
+    L.Draw.Polyline.include(L.Draw.Feature.Pin);
+    L.Draw.Polyline.addInitHook('_pin_initialize');
+
     // Auto enable pin handler for editing features if pin option is enabled
     L.Edit.Marker.Pin = {
         _pin_initialize: function () {
@@ -337,12 +343,6 @@
 
     L.Edit.Marker.include(L.Edit.Marker.Pin);
     L.Edit.Marker.addInitHook('_pin_initialize');
-
-    // L.Draw.Feature.include(L.Draw.Feature.Pin);
-    // L.Draw.Feature.addInitHook('_pin_initialize');
-
-    L.Draw.Polyline.include(L.Draw.Feature.Pin);
-    L.Draw.Polyline.addInitHook('_pin_initialize');
 
     L.Edit.Poly.Pin = {
         _pin_initialize: function () {
