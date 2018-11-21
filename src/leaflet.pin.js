@@ -8,6 +8,7 @@
         initialize: function (map, marker, options) {
             L.Handler.prototype.initialize.call(this, map);
             L.Util.setOptions(this, options || {});
+            L.Handler.MarkerPin.include(L.Evented.prototype);
         },
 
         enable: function (marker) {
@@ -181,25 +182,6 @@
         addGuideLayer: function (layer) {
             this._parse(layer);
         }
-
-        // TODO kklimczak: layer can not pin to itself during
-        // deleteGuideLayers: function (layer) {
-        //     console.log(layer);
-        //     for(var i = 0; i < this._guides.length; i++) {
-        //         console.log(this._guides[i] instanceof L.LayerGroup);
-        //         console.log(this._guides[i]);
-        //         if (this._guides[i] instanceof L.LayerGroup && this._guides[i].hasLayer(layer)) {
-        //             //this._guides[i].removeLayer(L.Util.stamp(layer));
-        //             this._currentDeletedGuideLayer = layer;
-        //             console.log(this._guides[i].hasLayer(layer), 'deleted')
-        //         } else {
-        //             if (L.Util.stamp(this._guides[i]) === L.Util.stamp(layer)) {
-        //                 this._guides[i] = undefined;
-        //                 console.log('deleted');
-        //             }
-        //         }
-        //     }
-        // }
     };
 
     L.Map.include(L.Map.Pin);
@@ -215,6 +197,21 @@
 
     // Auto enable pin handler for drawing if pin option is enabled
     L.Draw.Feature.Pin = {
+
+        /*
+            This a workaround because `L.Draw.Feature.addInitHook('_pin_initialize')` below does not work 
+            The '_pin_initialize' is never called as initHook. 
+            Check out https://github.com/Leaflet/Leaflet.draw/issues/857 - "L.Draw.Feature.addInitHook(...) stopped working in 0.4.13"
+
+            So we have to override the constructor (initialize method) and call this._pin_initialize() directly from constructor
+        */
+
+        baseInitialize: L.Draw.Feature.prototype.initialize,
+        initialize: function (map, options) {
+            this.baseInitialize.apply(this, arguments);
+            this._pin_initialize();
+        },
+
         _pin_initialize: function () {
             this.on('enabled', this._pin_on_enabled, this);
             this.on('disabled', this._pin_on_disabled, this);
@@ -310,13 +307,19 @@
             }
             delete this._pinning;
         }
-    };
+    // });
+    }
 
-    // L.Draw.Feature.include(L.Draw.Feature.Pin);
-    // L.Draw.Feature.addInitHook('_pin_initialize');
+    
+    
+    L.Draw.Feature.include(L.Draw.Feature.Pin);
 
-    L.Draw.Polyline.include(L.Draw.Feature.Pin);
-    L.Draw.Polyline.addInitHook('_pin_initialize');
+    /* 
+        This a workaround because `L.Draw.Feature.addInitHook('_pin_initialize')` below does not work 
+        The '_pin_initialize' is never called as initHook. 
+        Check out https://github.com/Leaflet/Leaflet.draw/issues/857 - "L.Draw.Feature.addInitHook(...) stopped working in 0.4.13"
+    */
+    //L.Draw.Feature.addInitHook('_pin_initialize');
 
     // Auto enable pin handler for editing features if pin option is enabled
     L.Edit.Marker.Pin = {

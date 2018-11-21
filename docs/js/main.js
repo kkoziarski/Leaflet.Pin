@@ -15,6 +15,8 @@ map.addLayer(osm);
 var drawnItems = new L.FeatureGroup();
 map.addLayer(drawnItems);
 
+// var testmarker = new L.Draw.Marker(map);
+
 var drawControl = new L.Control.Draw({
   draw: {
     polyline: {
@@ -23,16 +25,12 @@ var drawControl = new L.Control.Draw({
     polygon: {
       distance: 25
     },
-    marker: false,
     rectangle: {},
-    circle: false,
-    circlemarker: false
-    // marker: {
-    //   distance: 25
-    // },
-    // rectangle: {},
-    // circle: {},
-    // circlemarker: {}
+    marker: {
+      distance: 25
+    },
+    circle: false, // doesn't work
+    circlemarker: {}
   },
   edit: {
     featureGroup: drawnItems
