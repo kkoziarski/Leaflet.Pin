@@ -1,6 +1,6 @@
 #### General ##
 
-Enable attaching _polygons_ to other layers during draw or edit features with **Leaflet.Draw**. Checkout [demo](https://krzyhook.github.io/Leaflet.Pin/).
+Enable attaching _polygons_, _rectangles_ and _markers_ (circles do not work yet) to other layers during draw or edit features with **Leaflet.Draw**. Checkout [demo](https://krzyhook.github.io/Leaflet.Pin/).
 
 This is adjustment of the original [Leaflet.Pin](https://kklimczak.github.io/Leaflet.Pin/) to the newest `leaflet.js` and `leaflet.draw.js` which is no longer maintained.
 
