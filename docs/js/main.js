@@ -5,7 +5,7 @@ var map = L.map('map', {
   guideLayers: []
 });
 
-var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+var osmUrl='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 var osmAttrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
 var osm = new L.TileLayer(osmUrl, {minZoom: 8, maxZoom: 16, attribution: osmAttrib});
 
@@ -15,6 +15,8 @@ map.addLayer(osm);
 var drawnItems = new L.FeatureGroup();
 map.addLayer(drawnItems);
 
+// var testmarker = new L.Draw.Marker(map);
+
 var drawControl = new L.Control.Draw({
   draw: {
     polyline: {
@@ -23,11 +25,12 @@ var drawControl = new L.Control.Draw({
     polygon: {
       distance: 25
     },
+    rectangle: {},
     marker: {
       distance: 25
     },
-    rectangle: {},
-    circle: {}
+    circle: false, // doesn't work
+    circlemarker: {}
   },
   edit: {
     featureGroup: drawnItems
