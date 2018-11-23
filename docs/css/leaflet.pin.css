@@ -1,0 +1,20 @@
+.leaflet-pin-marker {
+    margin-left: -10px !important;
+    margin-top: -10px !important;
+    width: 20px !important;
+    height: 20px !important;
+}
+
+.leaflet-control-pin {
+    width: 26px;
+    height: 26px;
+}
+
+.leaflet-control-pin a {
+    background: url("images/pin-disabled.png");
+    background-position: -2px -2px;
+}
+
+.leaflet-control-pin-enabled a {
+    background: url("images/pin.png");
+}
